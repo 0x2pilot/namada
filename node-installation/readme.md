@@ -11,12 +11,14 @@ requirements, so fill free to use it to set up node for the current and upcoming
     
     Paste you validator name in `ALIAS` variable
 
-    Use `NODE_ID=0` if you don't want to use default port
+    Set `NODE_ID=0` if you don't want to use custom port.
+    Set `NODE_ID=1` if you have already 1 tendermint node running on the same machine.
+    Set `NODE_ID=2` if you have already 2 tendermint nodes running and etc.
 
-    The rest of parameters will updated to the required values.
+    The rest of parameters will be updated to the required values once the new testnet is announced.
     ```
     export ALIAS="" && \
-    export NODE_ID="10" && \
+    export NODE_ID="0" && \
     export CHAIN_ID=public-testnet-14.5d79b6958580 && \
     export BINARY_URL=https://github.com/anoma/namada/releases/download/v0.23.1/namada-v0.23.1-Linux-x86_64.tar.gz && \
     export BASE_DIR=$HOME/.local/share/namada && \
@@ -45,7 +47,7 @@ requirements, so fill free to use it to set up node for the current and upcoming
     namada client utils join-network --chain-id $CHAIN_ID --genesis-validator $ALIAS
     ```
 
-5. [ Skip you don't need custom ports ] Setup custom ports
+5. [ Skip if you don't need custom ports ] Setup custom ports
 
     ```
     sed -i.bak -e "\
