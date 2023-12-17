@@ -5,7 +5,7 @@ Bellow you will find step-by-step instructions on how to install namada node wit
 have default ports occupied by another tendermint node for example. Guide is updated with the latest testnet
 requirements, so fill free to use it to set up node for the current and upcoming testnets.
 
-## Instructions for testnet 14
+## Instructions for testnet 15
 
 1. Export variables
     
