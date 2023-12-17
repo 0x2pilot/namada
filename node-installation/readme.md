@@ -19,8 +19,8 @@ requirements, so fill free to use it to set up node for the current and upcoming
     ```
     export ALIAS="" && \
     export NODE_ID="0" && \
-    export CHAIN_ID=public-testnet-14.5d79b6958580 && \
-    export BINARY_URL=https://github.com/anoma/namada/releases/download/v0.23.1/namada-v0.23.1-Linux-x86_64.tar.gz && \
+    export CHAIN_ID=public-testnet-15.0dacadb8d663 && \
+    export BINARY_URL=https://github.com/anoma/namada/releases/download/v0.28.0/namada-v0.28.0-Linux-x86_64.tar.gz && \
     export BASE_DIR=$HOME/.local/share/namada && \
     export TM_HASH=v0.1.4-abciplus && \
     export RPC_PORT=$((NODE_ID+26))657 && \
@@ -54,31 +54,32 @@ requirements, so fill free to use it to set up node for the current and upcoming
     s%^proxy_app = \"tcp://127.0.0.1:26658\"%proxy_app = \"tcp://127.0.0.1:$((NODE_ID+26))658\"%; \
     s%^laddr = \"tcp://127.0.0.1:26657\"%laddr = \"tcp://127.0.0.1:$((NODE_ID+26))657\"%; \
     s%^laddr = \"tcp://0.0.0.0:26656\"%laddr = \"tcp://0.0.0.0:$((NODE_ID+26))656\"%; \
-    s%^oracle_rpc_endpoint = \"http://127.0.0.1:8545\"%oracle_rpc_endpoint = \"http://127.0.0.1:$((NODE_ID+8))545\"%;
+    s%^oracle_rpc_endpoint = \"http://127.0.0.1:8545\"%oracle_rpc_endpoint = \"http://127.0.0.1:$((NODE_ID+8))545\"%;" \
+    $BASE_DIR/$CHAIN_ID/config.toml
     ```
 
 6. Create / update namada service
 
-    ```
-    sudo tee /etc/systemd/system/namadad.service > /dev/null <<EOF
-    [Unit]
-    Description=namada
-    After=network-online.target
-    [Service]
-    User=root
-    WorkingDirectory=$HOME/.namada
-    Environment=NAMADA_LOG=debug
-    Environment=NAMADA_CMT_STDOUT=true
-    ExecStart=/usr/local/bin/namada --base-dir=$BASE_DIR --chain-id $CHAIN_ID node ledger run 
-    StandardOutput=syslog
-    StandardError=syslog
-    Restart=always
-    RestartSec=10
-    LimitNOFILE=65535
-    [Install]
-    WantedBy=multi-user.target
-    EOF
-    ```
+```
+sudo tee /etc/systemd/system/namadad.service > /dev/null <<EOF
+[Unit]
+Description=namada
+After=network-online.target
+[Service]
+User=root
+WorkingDirectory=$BASE_DIR
+Environment=NAMADA_LOG=debug
+Environment=NAMADA_CMT_STDOUT=true
+ExecStart=/usr/local/bin/namada --base-dir=$BASE_DIR --chain-id $CHAIN_ID node ledger run
+StandardOutput=syslog
+StandardError=syslog
+Restart=always
+RestartSec=10
+LimitNOFILE=65535
+[Install]
+WantedBy=multi-user.target
+EOF
+```
 
 7. Start namada service and see the logs
 
