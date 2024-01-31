@@ -19,8 +19,8 @@ requirements, so fill free to use it to set up node for the current and upcoming
     ```
     export ALIAS="" && \
     export NODE_ID="0" && \
-    export CHAIN_ID=public-testnet-15.0dacadb8d663 && \
-    export BINARY_URL=https://github.com/anoma/namada/releases/download/v0.28.1/namada-v0.28.1-Linux-x86_64.tar.gz && \
+    export CHAIN_ID=shielded-expedition.b40d8e9055 && \
+    export BINARY_URL=https://github.com/anoma/namada/releases/download/v0.31.0/namada-v0.31.0-Linux-x86_64.tar.gz && \
     export BASE_DIR=$HOME/.local/share/namada && \
     export TM_HASH=v0.1.4-abciplus && \
     export RPC_PORT=$((NODE_ID+26))657 && \
